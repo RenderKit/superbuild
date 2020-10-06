@@ -89,3 +89,16 @@ build_subproject(
     -DOSPRAY_INSTALL_DEPENDENCIES=OFF
   DEPENDS_ON rkcommon openvkl embree oidn
 )
+
+build_subproject(
+  NAME ospray_studio
+  URL "https://github.com/ospray/ospray_studio/archive/v0.5.0.zip"
+  BUILD_ARGS
+    -DTBB_ROOT=${TBB_PATH}
+    -DBUILD_APPS=ON
+    -DBUILD_PLUGINS=ON
+    -DENABLE_OPENIMAGEIO=OFF  # These can be enabled is the dependency is pre-installed
+    -DENABLE_EXR=OFF
+    -DENABLE_OPENVDB=OFF
+  DEPENDS_ON ospray rkcommon openvkl embree oidn
+)
