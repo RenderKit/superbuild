@@ -39,7 +39,7 @@ include(get_glfw.cmake)
 
 build_subproject(
   NAME rkcommon
-  URL "https://github.com/ospray/rkcommon/archive/v1.6.0.zip"
+  URL "https://github.com/ospray/rkcommon/archive/v1.6.1.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DINSTALL_DEPS=OFF
@@ -49,7 +49,7 @@ build_subproject(
 
 build_subproject(
   NAME embree
-  URL "https://github.com/embree/embree/archive/v3.12.2.zip"
+  URL "https://github.com/embree/embree/archive/v3.13.0.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -60,7 +60,7 @@ build_subproject(
 
 build_subproject(
   NAME openvkl
-  URL "https://github.com/openvkl/openvkl/archive/v0.12.0.zip"
+  URL "https://github.com/openvkl/openvkl/archive/v0.13.0.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -72,7 +72,7 @@ build_subproject(
 
 build_subproject(
   NAME oidn
-  URL "https://github.com/OpenImageDenoise/oidn/releases/download/v1.3.0/oidn-1.3.0.src.zip"
+  URL "https://github.com/OpenImageDenoise/oidn/releases/download/v1.4.0/oidn-1.4.0.src.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -82,7 +82,7 @@ build_subproject(
 
 build_subproject(
   NAME ospray
-  URL "https://github.com/ospray/ospray/archive/v2.5.0.zip"
+  URL "https://github.com/ospray/ospray/archive/v2.6.0.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -96,9 +96,16 @@ build_subproject(
   DEPENDS_ON rkcommon openvkl embree oidn glfw
 )
 
+if(WIN32)
+  set(patch_command C:\Program Files\Git\usr\bin\patch.exe cmake/pybind11.cmake ${CMAKE_SOURCE_DIR}/pybind11.cmake.patch)
+else()
+  set(patch_command patch cmake/pybind11.cmake ${CMAKE_SOURCE_DIR}/pybind11.cmake.patch)
+endif()
+
 build_subproject(
   NAME ospray_studio
-  URL "https://github.com/ospray/ospray_studio/archive/v0.6.0.zip"
+  URL "https://github.com/ospray/ospray_studio/archive/v0.7.0.zip"
+  PATCH_COMMAND ${patch_command}
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DBUILD_APPS=ON

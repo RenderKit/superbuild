@@ -20,7 +20,7 @@ macro(build_subproject)
   # See cmake_parse_arguments docs to see how args get parsed here:
   #    https://cmake.org/cmake/help/latest/command/cmake_parse_arguments.html
   set(oneValueArgs NAME URL CUSTOM_SOURCE_PACKAGE_PATH)
-  set(multiValueArgs BUILD_ARGS DEPENDS_ON)
+  set(multiValueArgs BUILD_ARGS DEPENDS_ON PATCH_COMMAND)
   cmake_parse_arguments(BUILD_SUBPROJECT "" "${oneValueArgs}"
                         "${multiValueArgs}" ${ARGN})
 
@@ -48,6 +48,7 @@ macro(build_subproject)
       -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
       ${BUILD_SUBPROJECT_BUILD_ARGS}
     BUILD_COMMAND ${DEFAULT_BUILD_COMMAND}
+    PATCH_COMMAND ${BUILD_SUBPROJECT_PATCH_COMMAND}
     BUILD_ALWAYS OFF
   )
 
