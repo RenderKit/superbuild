@@ -1,9 +1,9 @@
 ## Copyright 2021 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(SUBPROJECT_NAME ispc-v1.15.0)
+set(ISPC_VERSION 1.15.0)
 
-set(SUBPROJECT_PATH ${INSTALL_DIR_ABSOLUTE})
+set(SUBPROJECT_NAME ispc-v${ISPC_VERSION})
 
 if (APPLE)
   set(ISPC_SUFFIX "macOS.tar.gz")
@@ -13,7 +13,7 @@ else()
   set(ISPC_SUFFIX "linux.tar.gz")
 endif()
 
-set(ISPC_URL "https://github.com/ispc/ispc/releases/download/v1.15.0/ispc-v1.15.0-${ISPC_SUFFIX}")
+set(ISPC_URL "https://github.com/ispc/ispc/releases/download/v${ISPC_VERSION}/ispc-v${ISPC_VERSION}-${ISPC_SUFFIX}")
 
 ExternalProject_Add(ispc
   PREFIX ${SUBPROJECT_NAME}

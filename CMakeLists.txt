@@ -97,7 +97,7 @@ build_subproject(
 )
 
 if(WIN32)
-  set(patch_command C:\Program Files\Git\usr\bin\patch.exe cmake/pybind11.cmake ${CMAKE_SOURCE_DIR}/pybind11.cmake.patch)
+  set(patch_command "C:/Program\ Files/Git/usr/bin/patch.exe" cmake/pybind11.cmake ${CMAKE_SOURCE_DIR}/pybind11.cmake.patch)
 else()
   set(patch_command patch cmake/pybind11.cmake ${CMAKE_SOURCE_DIR}/pybind11.cmake.patch)
 endif()

@@ -1,8 +1,9 @@
 ## Copyright 2021 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(SUBPROJECT_NAME oneapi-tbb-2021.1.1)
-set(TBB_VERSION v2021.1.1)
+set(TBB_VERSION 2021.2.0)
+
+set(SUBPROJECT_NAME oneapi-tbb-${TBB_VERSION})
 
 if (APPLE)
   set(TBB_SUFFIX mac.tgz)
@@ -12,7 +13,7 @@ else()
   set(TBB_SUFFIX lin.tgz)
 endif()
 
-set(TBB_URL "https://github.com/oneapi-src/oneTBB/releases/download/${TBB_VERSION}/${SUBPROJECT_NAME}-${TBB_SUFFIX}")
+set(TBB_URL "https://github.com/oneapi-src/oneTBB/releases/download/v${TBB_VERSION}/${SUBPROJECT_NAME}-${TBB_SUFFIX}")
 
 ExternalProject_Add(tbb
   PREFIX ${SUBPROJECT_NAME}
