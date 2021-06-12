@@ -113,6 +113,7 @@ build_subproject(
     -DENABLE_OPENIMAGEIO=OFF  # These can be enabled if the dependency is pre-installed
     -DENABLE_EXR=OFF
     -DENABLE_OPENVDB=OFF
+    -DUSE_PYSG=OFF # Disable due to oneAPI barebones base install requirements.
   DEPENDS_ON ospray rkcommon openvkl embree oidn glfw
 )
 
