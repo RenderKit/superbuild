@@ -4,6 +4,8 @@ This CMake script will pull down Intel® oneAPI Rendering Toolkit libraries and
 build them from source. The result is an install directory with everything in
 it (`CMAKE_INSTALL_PREFIX`).
 
+Requirements: A C++-14-capable compiler and libstdc++.so.6.0.21 or greater.
+
 Run with:
 
 ```bash
