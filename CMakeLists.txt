@@ -36,6 +36,7 @@ endif()
 include(get_tbb.cmake)
 include(get_ispc.cmake)
 include(get_glfw.cmake)
+include(get_snappy.cmake)
 
 build_subproject(
   NAME rkcommon
@@ -93,7 +94,7 @@ build_subproject(
     -DOSPRAY_ENABLE_APPS=OFF
     -DOSPRAY_STRICT_BUILD=OFF
     -DOSPRAY_INSTALL_DEPENDENCIES=OFF
-  DEPENDS_ON rkcommon openvkl embree oidn glfw
+  DEPENDS_ON rkcommon openvkl embree oidn glfw snappy
 )
 
 build_subproject(
