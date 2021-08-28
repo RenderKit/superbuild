@@ -1,7 +1,7 @@
 ## Copyright 2021 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(ISPC_VERSION 1.15.0)
+set(ISPC_VERSION 1.16.1)
 
 set(SUBPROJECT_NAME ispc-v${ISPC_VERSION})
 
