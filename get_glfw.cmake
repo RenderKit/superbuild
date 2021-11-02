@@ -1,7 +1,7 @@
 ## Copyright 2009-2021 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(GLFW_VERSION 3.2.1)
+set(GLFW_VERSION 3.3.4)
 
 set(COMPONENT_NAME glfw)
 
