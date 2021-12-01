@@ -5,10 +5,13 @@ build them from source. The result is an install directory with everything in
 it (`CMAKE_INSTALL_PREFIX`).
 
 Requirements:
- - A C++-14-capable compiler and libstdc++.so.6.0.21 or greater.
-
-Recommendations:
- - Python 3.7 is validated for OSPRay Studio's python bindings and supported by oneAPI 2021.4
+- A C++-14-capable compiler and libstdc++.so.6.0.21 or greater.
+- CMake 3.1 or greater
+- Python 3.6 or greater (including development tools) with the following packages
+  - numpy
+  - Note: Python 3.7 is validated for OSPRay Studio's python bindings and supported by oneAPI 2021.4
+- Linux system requirements:
+  - libgl1-mesa-dev, libxcursor-dev, libxi-dev, libxinerama-dev, libxrandr-dev  
 
 Run with:
 
