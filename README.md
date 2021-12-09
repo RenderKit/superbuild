@@ -9,7 +9,7 @@ Requirements:
 - CMake 3.1 or greater
 - Python 3.6 or greater (including development tools) with the following packages
   - numpy
-  - Note: Python 3.7 is validated for OSPRay Studio's python bindings and supported by oneAPI 2021.4
+  - Note: Python 3.9 is validated for Intel® OSPRay Studio's python bindings and supported by Intel® oneAPI 2022
 - Linux system requirements:
   - libgl1-mesa-dev, libxcursor-dev, libxi-dev, libxinerama-dev, libxrandr-dev  
 
