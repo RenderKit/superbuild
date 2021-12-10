@@ -11,7 +11,7 @@ Requirements:
   - numpy
   - Note: Python 3.9 is validated for Intel® OSPRay Studio's python bindings and supported by Intel® oneAPI 2022
 - Linux system requirements:
-  - libgl1-mesa-dev, libxcursor-dev, libxi-dev, libxinerama-dev, libxrandr-dev  
+  - depending on your linux system, you may need to install X11 and GL development libraries
 
 Run with:
 
