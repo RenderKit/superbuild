@@ -11,6 +11,7 @@ endif()
 
 project(renderkit_superbuild)
 
+include(CMakeDependentOption)
 include(ExternalProject)
 include(GNUInstallDirs)
 include(ProcessorCount)
@@ -27,16 +28,23 @@ set(DEFAULT_BUILD_COMMAND cmake --build . --config release -j ${NUM_BUILD_JOBS})
 get_filename_component(INSTALL_DIR_ABSOLUTE
   ${CMAKE_INSTALL_PREFIX} ABSOLUTE BASE_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
-if(WIN32 OR LINUX)
-  set(OSPRAY_MODULE_MPI_FLAG "-DOSPRAY_MODULE_MPI=ON")
-endif()
+cmake_dependent_option(
+  OSPRAY_ENABLE_MODULE_MPI
+  "Enable OSPRay's MPI module"
+  ON
+  "NOT APPLE"
+  OFF
+)
 
 ## Build projects ##
 
 include(get_tbb.cmake)
 include(get_ispc.cmake)
 include(get_glfw.cmake)
-include(get_snappy.cmake)
+
+if(OSPRAY_ENABLE_MODULE_MPI)
+  include(get_snappy.cmake)
+endif()
 
 build_subproject(
   NAME rkcommon
@@ -90,11 +98,11 @@ build_subproject(
     -DOSPRAY_BUILD_ISA=ALL
     -DOSPRAY_MODULE_BILINEAR_PATCH=OFF
     -DOSPRAY_MODULE_DENOISER=ON
-    ${OSPRAY_MODULE_MPI_FLAG}
+    -DOSPRAY_MODULE_MPI=${OSPRAY_ENABLE_MODULE_MPI}
     -DOSPRAY_ENABLE_APPS=OFF
     -DOSPRAY_STRICT_BUILD=OFF
     -DOSPRAY_INSTALL_DEPENDENCIES=OFF
-  DEPENDS_ON rkcommon openvkl embree oidn glfw snappy
+  DEPENDS_ON rkcommon openvkl embree oidn glfw $<$<BOOL:${OSPRAY_ENABLE_MODULE_MPI}>:snappy>
 )
 
 build_subproject(
