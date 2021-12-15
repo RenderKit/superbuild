@@ -107,7 +107,7 @@ build_subproject(
 
 build_subproject(
   NAME ospray_studio
-  URL "https://github.com/ospray/ospray_studio/archive/refs/tags/v0.9.0.zip"
+  URL "https://github.com/ospray/ospray_studio/archive/refs/tags/v0.9.1.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DBUILD_APPS=ON
