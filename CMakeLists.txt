@@ -48,7 +48,7 @@ endif()
 
 build_subproject(
   NAME rkcommon
-  URL "https://github.com/ospray/rkcommon/archive/refs/tags/v1.8.0.zip"
+  URL "https://github.com/ospray/rkcommon/archive/refs/tags/v1.9.0.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DINSTALL_DEPS=OFF
@@ -58,7 +58,7 @@ build_subproject(
 
 build_subproject(
   NAME embree
-  URL "https://github.com/embree/embree/archive/refs/tags/v3.13.2.zip"
+  URL "https://github.com/embree/embree/archive/refs/tags/v3.13.3.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -69,7 +69,7 @@ build_subproject(
 
 build_subproject(
   NAME openvkl
-  URL "https://github.com/openvkl/openvkl/archive/refs/tags/v1.1.0.zip"
+  URL "https://github.com/openvkl/openvkl/archive/refs/tags/v1.2.0.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -81,7 +81,7 @@ build_subproject(
 
 build_subproject(
   NAME oidn
-  URL "https://github.com/OpenImageDenoise/oidn/releases/download/v1.4.2/oidn-1.4.2.src.zip"
+  URL "https://github.com/OpenImageDenoise/oidn/releases/download/v1.4.3/oidn-1.4.3.src.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -91,7 +91,7 @@ build_subproject(
 
 build_subproject(
   NAME ospray
-  URL "https://github.com/ospray/ospray/archive/refs/tags/v2.8.0.zip"
+  URL "https://github.com/ospray/ospray/archive/refs/tags/v2.9.0.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -107,7 +107,7 @@ build_subproject(
 
 build_subproject(
   NAME ospray_studio
-  URL "https://github.com/ospray/ospray_studio/archive/refs/tags/v0.9.1.zip"
+  URL "https://github.com/ospray/ospray_studio/archive/refs/tags/v0.10.0.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DBUILD_APPS=ON
