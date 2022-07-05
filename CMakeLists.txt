@@ -46,9 +46,16 @@ if(OSPRAY_ENABLE_MODULE_MPI)
   include(get_snappy.cmake)
 endif()
 
+set(_RKCOMMON_VERSION 1.10.0)
+set(_EMBREE_VERSION 3.13.4)
+set(_OPENVKL_VERSION 1.3.0)
+set(_OIDN_VERSION 1.4.3)
+set(_OSPRAY_VERSION 2.10.0)
+set(_OSPRAY_STUDIO_VERSION 0.11.0)
+
 build_subproject(
   NAME rkcommon
-  URL "https://github.com/ospray/rkcommon/archive/refs/tags/v1.9.0.zip"
+  URL "https://github.com/ospray/rkcommon/archive/refs/tags/v${_RKCOMMON_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DINSTALL_DEPS=OFF
@@ -58,7 +65,7 @@ build_subproject(
 
 build_subproject(
   NAME embree
-  URL "https://github.com/embree/embree/archive/refs/tags/v3.13.3.zip"
+  URL "https://github.com/embree/embree/archive/refs/tags/v${_EMBREE_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -69,7 +76,7 @@ build_subproject(
 
 build_subproject(
   NAME openvkl
-  URL "https://github.com/openvkl/openvkl/archive/refs/tags/v1.2.0.zip"
+  URL "https://github.com/openvkl/openvkl/archive/refs/tags/v${_OPENVKL_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -81,7 +88,7 @@ build_subproject(
 
 build_subproject(
   NAME oidn
-  URL "https://github.com/OpenImageDenoise/oidn/releases/download/v1.4.3/oidn-1.4.3.src.zip"
+  URL "https://github.com/OpenImageDenoise/oidn/releases/download/v${_OIDN_VERSION}/oidn-${_OIDN_VERSION}.src.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -91,7 +98,7 @@ build_subproject(
 
 build_subproject(
   NAME ospray
-  URL "https://github.com/ospray/ospray/archive/refs/tags/v2.9.0.zip"
+  URL "https://github.com/ospray/ospray/archive/refs/tags/v${_OSPRAY_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -107,7 +114,7 @@ build_subproject(
 
 build_subproject(
   NAME ospray_studio
-  URL "https://github.com/ospray/ospray_studio/archive/refs/tags/v0.10.0.zip"
+  URL "https://github.com/ospray/ospray_studio/archive/refs/tags/v${_OSPRAY_STUDIO_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DBUILD_APPS=ON
