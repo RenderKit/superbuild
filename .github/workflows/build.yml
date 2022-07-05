@@ -1,0 +1,44 @@
+
+name: Build components
+
+on:
+  pull-request:
+
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-linux:
+    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker.yml@devel
+    with:
+      image: centos:7-devenv
+      cmd: |
+        module load intel/2022.1
+        export CC=icx
+        export CXX=icpx
+        export CXXFLAGS='-static-intel -fPIC'
+        mkdir build
+        scl enable devtoolset-7 'cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install -DOSPRAY_ENABLE_MODULE_MPI=OFF'
+        scl enable devtoolset-7 'cmake --build build --config Release'
+
+  build-macos:
+    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/macos.yml@devel
+    with:
+      cmd: |
+        export CXXFLAGS='-stdlib=libc++'
+        export MACOSX_DEPLOYMENT_TARGET=11.0
+        mkdir build
+        cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install
+        cmake --build build --config Release
+
+  build-windows:
+    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/windows.yml@devel
+    with:
+      cmd: |
+        call "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Auxiliary/Build/vcvars64.bat"
+        mkdir build
+        cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install -DOSPRAY_ENABLE_MODULE_MPI=OFF -G Ninja
+        cmake --build build --config Release
+      shell: cmd
+
