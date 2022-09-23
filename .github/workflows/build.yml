@@ -10,9 +10,9 @@ concurrency:
 
 jobs:
   build-centos7:
-    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker.yml@devel
+    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker.yml@main
     with:
-      image: centos:7-devenv
+      image: devenv/centos:7
       cmd: |
         module load intel/2022.1
         export CC=icx
@@ -23,9 +23,22 @@ jobs:
         scl enable devtoolset-7 'cmake --build build --config Release'
 
   build-ubuntu2004:
-    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker.yml@devel
+    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker.yml@main
     with:
-      image: centos:7-devenv
+      image: ubuntu:20.04
+      cmd: |
+        module load intel/2022.1
+        export CC=icx
+        export CXX=icpx
+        export CXXFLAGS='-static-intel -fPIC'
+        mkdir build
+        cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install -DOSPRAY_ENABLE_MODULE_MPI=OFF
+        cmake --build build --config Release
+
+  build-ubuntu2204:
+    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker.yml@main
+    with:
+      image: ubuntu:22.04
       cmd: |
         module load intel/2022.1
         export CC=icx
@@ -36,7 +49,7 @@ jobs:
         cmake --build build --config Release
 
   build-macos:
-    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/macos.yml@devel
+    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/macos.yml@main
     with:
       cmd: |
         export CXXFLAGS='-stdlib=libc++'
@@ -46,7 +59,7 @@ jobs:
         cmake --build build --config Release
 
   build-windows:
-    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/windows.yml@devel
+    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/windows.yml@main
     with:
       cmd: |
         call "C:/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Auxiliary/Build/vcvars64.bat"
