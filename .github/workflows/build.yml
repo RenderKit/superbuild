@@ -12,7 +12,7 @@ jobs:
   build-centos7:
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker.yml@main
     with:
-      image: devenv/centos:7
+      image: centos:7
       cmd: |
         module load intel/2022.1
         export CC=icx
