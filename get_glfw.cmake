@@ -1,7 +1,7 @@
 ## Copyright 2009-2021 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(GLFW_VERSION 3.3.4)
+set(GLFW_VERSION 3.3.8)
 
 set(COMPONENT_NAME glfw)
 
@@ -31,6 +31,7 @@ ExternalProject_Add(${COMPONENT_NAME}
     -DGLFW_BUILD_TESTS=OFF
   BUILD_COMMAND ${DEFAULT_BUILD_COMMAND}
   BUILD_ALWAYS ${ALWAYS_REBUILD}
+  PATCH_COMMAND git apply -v ${CMAKE_CURRENT_SOURCE_DIR}/glfw.patch
 )
 
 list(APPEND CMAKE_PREFIX_PATH ${COMPONENT_PATH})

@@ -29,6 +29,14 @@ get_filename_component(INSTALL_DIR_ABSOLUTE
   ${CMAKE_INSTALL_PREFIX} ABSOLUTE BASE_DIR ${CMAKE_CURRENT_BINARY_DIR})
 
 cmake_dependent_option(
+  EMBREE_SYCL_SUPPORT
+  "Enable Embree's SYCL support"
+  ON
+  "NOT APPLE"
+  OFF
+)
+
+cmake_dependent_option(
   OSPRAY_ENABLE_MODULE_MPI
   "Enable OSPRay's MPI module"
   ON
@@ -46,12 +54,13 @@ if(OSPRAY_ENABLE_MODULE_MPI)
   include(get_snappy.cmake)
 endif()
 
-set(_RKCOMMON_VERSION 1.10.0)
-set(_EMBREE_VERSION 3.13.5)
-set(_OPENVKL_VERSION 1.3.1)
+set(_RKCOMMON_VERSION 1.11.0)
+set(_EMBREE_VERSION 4.0.1)
+set(_OPENPGL_VERSION 0.5.0)
+set(_OPENVKL_VERSION 1.3.2)
 set(_OIDN_VERSION 1.4.3)
-set(_OSPRAY_VERSION 2.10.0)
-set(_OSPRAY_STUDIO_VERSION 0.11.1)
+set(_OSPRAY_VERSION 2.11.0)
+set(_OSPRAY_STUDIO_VERSION 0.12.0)
 
 build_subproject(
   NAME rkcommon
@@ -60,7 +69,7 @@ build_subproject(
     -DTBB_ROOT=${TBB_PATH}
     -DINSTALL_DEPS=OFF
     -DBUILD_TESTING=OFF
-  DEPENDS_ON tbb ispc
+  DEPENDS_ON tbb
 )
 
 build_subproject(
@@ -68,10 +77,20 @@ build_subproject(
   URL "https://github.com/embree/embree/archive/refs/tags/v${_EMBREE_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
-    -DISPC_EXECUTABLE=${ISPC_PATH}
+    -DEMBREE_ISPC_SUPPORT=ON
+    -DEMBREE_ISPC_EXECUTABLE=${ISPC_PATH}
+    -DEMBREE_SYCL_SUPPORT=${EMBREE_SYCL_SUPPORT}
     -DEMBREE_TUTORIALS=OFF
     -DBUILD_TESTING=OFF
-  DEPENDS_ON rkcommon
+  DEPENDS_ON tbb ispc glfw
+)
+
+build_subproject(
+  NAME openpgl
+  URL "https://github.com/OpenPathGuidingLibrary/openpgl/archive/refs/tags/v${_OPENPGL_VERSION}.zip"
+  BUILD_ARGS
+    -DTBB_ROOT=${TBB_PATH}
+  DEPENDS_ON tbb
 )
 
 build_subproject(
@@ -93,7 +112,7 @@ build_subproject(
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
     -DOIDN_APPS=ON
-  DEPENDS_ON rkcommon
+  DEPENDS_ON ispc tbb rkcommon
 )
 
 build_subproject(
@@ -119,9 +138,11 @@ build_subproject(
     -DTBB_ROOT=${TBB_PATH}
     -DBUILD_APPS=ON
     -DBUILD_PLUGINS=ON
+    -DBUILD_TESTING=OFF
     -DENABLE_OPENIMAGEIO=OFF  # These can be enabled if the dependency is pre-installed
     -DENABLE_EXR=OFF
     -DENABLE_OPENVDB=OFF
+    -DOSPRAY_INSTALL=OFF
     -DUSE_PYSG=ON
   DEPENDS_ON ospray rkcommon openvkl embree oidn glfw
 )
