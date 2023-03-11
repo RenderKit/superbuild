@@ -31,7 +31,7 @@ get_filename_component(INSTALL_DIR_ABSOLUTE
 cmake_dependent_option(
   EMBREE_SYCL_SUPPORT
   "Enable Embree's SYCL support"
-  ON
+  OFF
   "NOT APPLE"
   OFF
 )
