@@ -27,6 +27,8 @@ macro(build_subproject)
   # Setup SUBPROJECT_* variables (containing paths) for this function
   setup_subproject_path_vars(${BUILD_SUBPROJECT_NAME})
 
+  message("CMAKE_PREFIX_PATH = ${CMAKE_PREFIX_PATH}")
+
   # Build the actual subproject
   ExternalProject_Add(${SUBPROJECT_NAME}
     PREFIX ${SUBPROJECT_NAME}

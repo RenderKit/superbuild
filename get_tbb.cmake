@@ -23,9 +23,7 @@ ExternalProject_Add(tbb
   URL ${TBB_URL}
   CONFIGURE_COMMAND ""
   BUILD_COMMAND ""
-  INSTALL_COMMAND "${CMAKE_COMMAND}" -E copy_directory
-    <SOURCE_DIR>/lib
-    ${INSTALL_DIR_ABSOLUTE}/lib
+  INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/lib ${INSTALL_DIR_ABSOLUTE}/lib
   BUILD_ALWAYS OFF
 )
 

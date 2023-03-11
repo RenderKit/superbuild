@@ -14,7 +14,8 @@ jobs:
     with:
       image: centos:7
       cmd: |
-        module load intel/2022.1
+        module load cmake/3.25.1
+        module load intel/2023.0
         export CC=icx
         export CXX=icpx
         export CXXFLAGS='-static-intel -fPIC'
@@ -27,20 +28,25 @@ jobs:
     with:
       image: ubuntu:20.04
       cmd: |
-        module load intel/2022.1
+        module load cmake/3.25.1
+        module load intel/2023.0
         export CC=icx
         export CXX=icpx
         export CXXFLAGS='-static-intel -fPIC'
         mkdir build
         cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install -DOSPRAY_ENABLE_MODULE_MPI=OFF
         cmake --build build --config Release
+      artifact-path: build install
+      artifact-out: build-ubuntu2004
+      artifact-on-failure: true
 
   build-ubuntu2204:
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker.yml@main
     with:
       image: ubuntu:22.04
       cmd: |
-        module load intel/2022.1
+        module load cmake/3.25.1
+        module load intel/2023.0
         export CC=icx
         export CXX=icpx
         export CXXFLAGS='-static-intel -fPIC'
