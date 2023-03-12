@@ -1,7 +1,7 @@
 ## Copyright 2021 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(ISPC_VERSION 1.18.0 CACHE STRING "")
+set(ISPC_VERSION 1.19.0 CACHE STRING "")
 
 set(SUBPROJECT_NAME ispc-v${ISPC_VERSION})
 
@@ -15,6 +15,18 @@ endif()
 
 set(ISPC_URL "https://github.com/ispc/ispc/releases/download/v${ISPC_VERSION}/ispc-v${ISPC_VERSION}-${ISPC_SUFFIX}" CACHE STRING "")
 
+if(WIN32)
+  set(_ISPC_SRC_LIB_NAME lib)
+  set(_ISPC_DST_LIB_NAME lib)
+elseif(APPLE)
+  set(_ISPC_SRC_LIB_NAME lib)
+  set(_ISPC_DST_LIB_NAME lib)
+else()
+  set(_ISPC_SRC_LIB_NAME lib64)
+  set(_ISPC_DST_LIB_NAME lib64)
+  # set(FIND_LIBRARY_USE_LIB64_PATHS TRUE)
+endif()
+
 ExternalProject_Add(ispc
   PREFIX ${SUBPROJECT_NAME}
   STAMP_DIR ${SUBPROJECT_NAME}/stamp
@@ -23,10 +35,13 @@ ExternalProject_Add(ispc
   URL ${ISPC_URL}
   CONFIGURE_COMMAND ""
   BUILD_COMMAND ""
-  INSTALL_COMMAND "${CMAKE_COMMAND}" -E copy_if_different
-    <SOURCE_DIR>/bin/ispc${CMAKE_EXECUTABLE_SUFFIX}
-    ${INSTALL_DIR_ABSOLUTE}/bin/ispc${CMAKE_EXECUTABLE_SUFFIX}
+  INSTALL_COMMAND
+    COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/bin ${INSTALL_DIR_ABSOLUTE}/bin
+    COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/${_ISPC_SRC_LIB_NAME} ${INSTALL_DIR_ABSOLUTE}/${_ISPC_DST_LIB_NAME}
+    COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/include ${INSTALL_DIR_ABSOLUTE}/include
   BUILD_ALWAYS OFF
 )
 
 set(ISPC_PATH "${INSTALL_DIR_ABSOLUTE}/bin/ispc${CMAKE_EXECUTABLE_SUFFIX}")
+append_cmake_prefix_path(${INSTALL_DIR_ABSOLUTE}/${_ISPC_DST_LIB_NAME}/cmake/ispcrt-${ISPC_VERSION})
+

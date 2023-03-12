@@ -27,6 +27,8 @@ macro(build_subproject)
   # Setup SUBPROJECT_* variables (containing paths) for this function
   setup_subproject_path_vars(${BUILD_SUBPROJECT_NAME})
 
+  message("CMAKE_PREFIX_PATH = ${CMAKE_PREFIX_PATH}")
+
   # Build the actual subproject
   ExternalProject_Add(${SUBPROJECT_NAME}
     PREFIX ${SUBPROJECT_NAME}
@@ -38,6 +40,7 @@ macro(build_subproject)
     LIST_SEPARATOR | # Use the alternate list separator
     CMAKE_ARGS
       -DCMAKE_BUILD_TYPE=Release
+      -DCMAKE_NINJA_CMCLDEPS_RC=OFF
       -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
       -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
       -DCMAKE_INSTALL_PREFIX:PATH=${SUBPROJECT_INSTALL_PATH}

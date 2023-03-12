@@ -1,7 +1,7 @@
 ## Copyright 2021 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(TBB_VERSION 2021.5.0)
+set(TBB_VERSION 2021.8.0)
 
 set(SUBPROJECT_NAME oneapi-tbb-${TBB_VERSION})
 
@@ -23,9 +23,7 @@ ExternalProject_Add(tbb
   URL ${TBB_URL}
   CONFIGURE_COMMAND ""
   BUILD_COMMAND ""
-  INSTALL_COMMAND "${CMAKE_COMMAND}" -E copy_directory
-    <SOURCE_DIR>/lib
-    ${INSTALL_DIR_ABSOLUTE}/lib
+  INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/lib ${INSTALL_DIR_ABSOLUTE}/lib
   BUILD_ALWAYS OFF
 )
 
