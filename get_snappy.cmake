@@ -1,7 +1,7 @@
 ## Copyright 2021 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(SNAPPY_VERSION 1.1.8)
+set(SNAPPY_VERSION 1.1.9)
 
 set(COMPONENT_NAME snappy)
 
