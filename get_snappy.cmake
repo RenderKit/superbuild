@@ -13,7 +13,6 @@ endif()
 
 ExternalProject_Add(${COMPONENT_NAME}
   URL "https://github.com/google/snappy/archive/refs/tags/${SNAPPY_VERSION}.zip"
-  URL_HASH "SHA256=38b4aabf88eb480131ed45bfb89c19ca3e2a62daeb081bdf001cfb17ec4cd303"
 
   # # Skip updating on subsequent builds (faster)
   UPDATE_COMMAND ""
