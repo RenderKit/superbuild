@@ -1,12 +1,12 @@
 ## Copyright 2021 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(ISPC_VERSION 1.19.0 CACHE STRING "")
+set(ISPC_VERSION 1.20.0 CACHE STRING "")
 
 set(SUBPROJECT_NAME ispc-v${ISPC_VERSION})
 
 if (APPLE)
-  set(ISPC_SUFFIX "macOS.tar.gz")
+  set(ISPC_SUFFIX "macOS.x86_64.tar.gz")
 elseif(WIN32)
   set(ISPC_SUFFIX "windows.zip")
 else()
