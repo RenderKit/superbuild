@@ -27,17 +27,33 @@ jobs:
   #       scl enable devtoolset-7 'cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install -DOSPRAY_ENABLE_MODULE_MPI=OFF'
   #       scl enable devtoolset-7 'cmake --build build --config Release'
 
+  build-rockylinux87:
+    secrets: inherit
+    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker_gpu.yml@main
+    with:
+      image: rockylinux:8.7
+      dpcpp-version: intel/2023.1
+      level-zero-version: public/1.12.0
+      cmd: |
+        module load cmake/3.25.3
+        module load impi/latest
+        export CC=icx
+        export CXX=icpx
+        export CXXFLAGS="-fhonor-infinities -fhonor-nans"
+        export LDFLAGS="-static-intel"
+        cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install -DOSPRAY_ENABLE_MODULE_MPI=OFF
+        cmake --build build --config Release
+
   build-ubuntu2004:
     secrets: inherit
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker_gpu.yml@main
     with:
       image: ubuntu:20.04
-      env-from-files: ./env/dpcpp-none.env
-      level-zero-version: public/1.9.4
-      install-gfx-driver: false
+      dpcpp-version: intel/2023.1
+      level-zero-version: public/1.12.0
       cmd: |
-        module load cmake/3.25.1
-        module load intel/2023.0
+        module load cmake/3.25.3
+        module load impi/latest
         export CC=icx
         export CXX=icpx
         export CXXFLAGS="-fhonor-infinities -fhonor-nans"
@@ -48,23 +64,22 @@ jobs:
       # artifact-out: build-ubuntu2004
       # artifact-on-failure: true
 
-  build-ubuntu2204:
-    secrets: inherit
-    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker_gpu.yml@main
-    with:
-      image: ubuntu:22.04
-      env-from-files: ./env/dpcpp-none.env
-      level-zero-version: public/1.9.4
-      install-gfx-driver: false
-      cmd: |
-        module load cmake/3.25.1
-        module load intel/2023.0
-        export CC=icx
-        export CXX=icpx
-        export CXXFLAGS="-fhonor-infinities -fhonor-nans"
-        export LDFLAGS="-static-intel"
-        cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install -DOSPRAY_ENABLE_MODULE_MPI=OFF
-        cmake --build build --config Release
+  # build-ubuntu2204:
+  #   secrets: inherit
+  #   uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker_gpu.yml@main
+  #   with:
+  #     image: ubuntu:22.04
+  #     dpcpp-version: intel/2023.1
+  #     level-zero-version: public/1.12.0
+  #     cmd: |
+  #       module load cmake/3.25.3
+  #       module load impi/latest
+  #       export CC=icx
+  #       export CXX=icpx
+  #       export CXXFLAGS="-fhonor-infinities -fhonor-nans"
+  #       export LDFLAGS="-static-intel"
+  #       cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install -DOSPRAY_ENABLE_MODULE_MPI=OFF
+  #       cmake --build build --config Release
 
   build-macos:
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/macos.yml@main
@@ -80,11 +95,10 @@ jobs:
     secrets: inherit
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/windows_gpu.yml@main
     with:
-      env-from-files: ./env/dpcpp-none.env
-      level-zero-version: public/1.9.4
-      install-gfx-driver: false
+      dpcpp-version: oneAPI/compiler/latest
+      level-zero-version: public/1.12.0
       cmd: |
-        call "C:\Program Files (x86)\Intel\oneAPI\compiler\latest\env\vars.bat"
+        call "C:\Program Files (x86)\Intel\oneAPI\mpi\latest\env\vars.bat"
         set CXX=icx.exe
         set CC=icx.exe
         cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install -DOSPRAY_ENABLE_MODULE_MPI=OFF -G Ninja
