@@ -1,5 +1,4 @@
 From 8dfd5804447a1f35c15e650737fee3694bc71f26 Mon Sep 17 00:00:00 2001
-From: Florian Reibold <florian.reibold@intel.com>
 Date: Mon, 6 Feb 2023 17:29:44 +0100
 Subject: [PATCH] fix LoadLibraryA
 
