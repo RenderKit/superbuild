@@ -16,7 +16,9 @@ ExternalProject_Add(${COMPONENT_NAME}
   STAMP_DIR ${COMPONENT_NAME}/stamp
   SOURCE_DIR ${COMPONENT_NAME}/src
   BINARY_DIR ${COMPONENT_NAME}/build
-  URL "http://github.com/glfw/glfw/archive/${GLFW_VERSION}.zip"
+  GIT_REPOSITORY "https://github.com/glfw/glfw.git"
+  GIT_TAG "3.3.8"
+  GIT_SHALLOW ON
   CMAKE_ARGS
     -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
     -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
