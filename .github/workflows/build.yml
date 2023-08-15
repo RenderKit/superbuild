@@ -32,7 +32,7 @@ jobs:
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker_gpu.yml@main
     with:
       image: rockylinux:8.7
-      dpcpp-version: intel/2023.1
+      dpcpp-version: intel/2023.2
       level-zero-version: public/1.12.0
       cmd: |
         module load cmake/3.25.3
@@ -49,7 +49,7 @@ jobs:
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker_gpu.yml@main
     with:
       image: ubuntu:20.04
-      dpcpp-version: intel/2023.1
+      dpcpp-version: intel/2023.2
       level-zero-version: public/1.12.0
       cmd: |
         module load cmake/3.25.3
@@ -64,22 +64,22 @@ jobs:
       # artifact-out: build-ubuntu2004
       # artifact-on-failure: true
 
-  # build-ubuntu2204:
-  #   secrets: inherit
-  #   uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker_gpu.yml@main
-  #   with:
-  #     image: ubuntu:22.04
-  #     dpcpp-version: intel/2023.1
-  #     level-zero-version: public/1.12.0
-  #     cmd: |
-  #       module load cmake/3.25.3
-  #       module load impi/latest
-  #       export CC=icx
-  #       export CXX=icpx
-  #       export CXXFLAGS="-fhonor-infinities -fhonor-nans"
-  #       export LDFLAGS="-static-intel"
-  #       cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install -DOSPRAY_ENABLE_MODULE_MPI=OFF
-  #       cmake --build build --config Release
+  build-ubuntu2204:
+    secrets: inherit
+    uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker_gpu.yml@main
+    with:
+      image: ubuntu:22.04
+      dpcpp-version: intel/2023.2
+      level-zero-version: public/1.12.0
+      cmd: |
+        module load cmake/3.25.3
+        module load impi/latest
+        export CC=icx
+        export CXX=icpx
+        export CXXFLAGS="-fhonor-infinities -fhonor-nans"
+        export LDFLAGS="-static-intel"
+        cmake -L -S . -B build -DCMAKE_INSTALL_PREFIX=install -DOSPRAY_ENABLE_MODULE_MPI=OFF
+        cmake --build build --config Release
 
   build-macos:
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/macos.yml@main
@@ -95,7 +95,7 @@ jobs:
     secrets: inherit
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/windows_gpu.yml@main
     with:
-      dpcpp-version: oneAPI/compiler/latest
+      dpcpp-version: oneAPI/compiler/2023.2.1
       level-zero-version: public/1.12.0
       cmd: |
         call "C:\Program Files (x86)\Intel\oneAPI\mpi\latest\env\vars.bat"
