@@ -1,7 +1,7 @@
 ## Copyright 2021 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(TBB_VERSION 2021.9.0)
+set(TBB_VERSION 2021.10.0)
 
 set(SUBPROJECT_NAME oneapi-tbb-${TBB_VERSION})
 
