@@ -19,6 +19,7 @@ jobs:
     secrets: inherit
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/docker_gpu.yml@main
     with:
+      runs-on: '["build"]'
       image: rockylinux:8.7
       dpcpp-version: intel/2024.0
       level-zero-version: public/1.15.1
@@ -43,6 +44,7 @@ jobs:
   build-macos:
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/macos.yml@main
     with:
+      runs-on: '["build", "X64"]'
       cmd: |
         export CXXFLAGS='-stdlib=libc++'
         export MACOSX_DEPLOYMENT_TARGET=11.0
@@ -54,6 +56,7 @@ jobs:
     secrets: inherit
     uses: intel-innersource/libraries.devops.renderkit.workflows/.github/workflows/windows_gpu.yml@main
     with:
+      runs-on: '["build", "NAS"]'
       dpcpp-version: oneAPI/compiler/2024.0
       level-zero-version: public/1.15.1
       ocloc-version: 77a13ae6-6100-4ddc-b069-0086ff44730c/ocloc_win_101.5082
