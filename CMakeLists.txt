@@ -37,7 +37,7 @@ set (OSPRAY_GPU_SUPPORT ${ENABLE_GPU_SUPPORT})
 cmake_dependent_option(
   OSPRAY_ENABLE_MODULE_MPI
   "Enable OSPRay's MPI module"
-  ON
+  OFF
   "NOT APPLE"
   OFF
 )
