@@ -1,6 +1,6 @@
-# Intel® oneAPI Rendering Toolkit CMake Superbuild
+# Intel® Rendering Toolkit CMake Superbuild
 
-This CMake script will pull down Intel® oneAPI Rendering Toolkit libraries and
+This CMake script will pull down Intel® Rendering Toolkit libraries and
 build them from source. The result is an install directory with everything in
 it (`CMAKE_INSTALL_PREFIX`).
 
@@ -9,10 +9,10 @@ Requirements:
 - CMake 3.12 or greater
 - Python 3.6 or greater (including development tools) with the following packages
   - numpy
-  - Note: Python 3.9 is validated for Intel® OSPRay Studio's python bindings and supported by Intel® oneAPI 2022
+  - Note: Python 3.9 is validated for Intel® OSPRay Studio's python bindings and supported by Intel® 2022
 - Linux system requirements:
   - depending on your linux system, you may need to install X11 and GL development libraries
-- For other dependencies, see latest release notes of Intel® oneAPI Rendering Toolkit components
+- For other dependencies, see latest release notes of Intel® Rendering Toolkit components
   - https://github.com/ospray/rkcommon
   - https://github.com/embree/embree
   - https://github.com/OpenImageDenoise/oidn
