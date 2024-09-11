@@ -119,17 +119,17 @@ if(OSPRAY_ENABLE_MODULE_MPI)
   include(get_snappy.cmake)
 endif()
 
-set(_RKCOMMON_VERSION 1.13.0)
-set(_EMBREE_VERSION 4.3.1)
+set(_RKCOMMON_VERSION 1.14.0)
+set(_EMBREE_VERSION 4.3.3)
 set(_OPENPGL_VERSION 0.6.0)
 set(_OPENVKL_VERSION 2.0.1)
-set(_OIDN_VERSION 2.2.0)
-set(_OSPRAY_VERSION 3.1.0)
-set(_OSPRAY_STUDIO_VERSION 1.0.0)
+set(_OIDN_VERSION 2.3.0)
+set(_OSPRAY_VERSION 3.2.0)
+set(_OSPRAY_STUDIO_VERSION 1.1.0)
 
 build_subproject(
   NAME rkcommon
-  URL "https://github.com/ospray/rkcommon/archive/refs/tags/v${_RKCOMMON_VERSION}.zip"
+  URL "https://github.com/renderkit/rkcommon/archive/refs/tags/v${_RKCOMMON_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DINSTALL_DEPS=OFF
@@ -139,7 +139,7 @@ build_subproject(
 
 build_subproject(
   NAME embree
-  URL "https://github.com/embree/embree/archive/refs/tags/v${_EMBREE_VERSION}.zip"
+  URL "https://github.com/renderkit/embree/archive/refs/tags/v${_EMBREE_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DEMBREE_ISPC_SUPPORT=ON
@@ -152,7 +152,7 @@ build_subproject(
 
 build_subproject(
   NAME openpgl
-  URL "https://github.com/OpenPathGuidingLibrary/openpgl/archive/refs/tags/v${_OPENPGL_VERSION}.zip"
+  URL "https://github.com/renderkit/openpgl/archive/refs/tags/v${_OPENPGL_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
   DEPENDS_ON tbb
@@ -160,7 +160,7 @@ build_subproject(
 
 build_subproject(
   NAME openvkl
-  URL "https://github.com/openvkl/openvkl/archive/refs/tags/v${_OPENVKL_VERSION}.zip"
+  URL "https://github.com/renderkit/openvkl/archive/refs/tags/v${_OPENVKL_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -173,7 +173,7 @@ build_subproject(
 
 build_subproject(
   NAME oidn
-  URL "https://github.com/OpenImageDenoise/oidn/releases/download/v${_OIDN_VERSION}/oidn-${_OIDN_VERSION}.src.zip"
+  URL "https://github.com/renderkit/oidn/releases/download/v${_OIDN_VERSION}/oidn-${_OIDN_VERSION}.src.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -185,7 +185,7 @@ build_subproject(
 
 build_subproject(
   NAME ospray
-  URL "https://github.com/ospray/ospray/archive/refs/tags/v${_OSPRAY_VERSION}.zip"
+  URL "https://github.com/renderkit/ospray/archive/refs/tags/v${_OSPRAY_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DISPC_EXECUTABLE=${ISPC_PATH}
@@ -203,7 +203,7 @@ build_subproject(
 
 build_subproject(
   NAME ospray_studio
-  URL "https://github.com/ospray/ospray_studio/archive/refs/tags/v${_OSPRAY_STUDIO_VERSION}.zip"
+  URL "https://github.com/renderkit/ospray-studio/archive/refs/tags/v${_OSPRAY_STUDIO_VERSION}.zip"
   BUILD_ARGS
     -DTBB_ROOT=${TBB_PATH}
     -DBUILD_APPS=ON
