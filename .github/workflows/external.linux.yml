@@ -1,0 +1,74 @@
+## Copyright 2024 Intel Corporation
+## SPDX-License-Identifier: Apache-2.0
+
+name: Linux
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: read-all
+
+jobs:
+  build-cpu-rocky-8:
+    runs-on: ubuntu-latest
+    container:
+      image: rockylinux:8
+
+    steps:
+    - name: Install packages
+      run: |
+        echo "Installing build dependencies..."
+        dnf update -y
+        dnf group install "Development Tools" -y
+        dnf install -y git cmake mesa-libGL-devel libXrandr-devel libXinerama-devel libXcursor-devel libXi-devel python3.11-devel
+
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Build
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make -j$(nproc)
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-cpu-rocky-8
+        path: build/install
+
+  build-cpu-ubuntu-2204:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:22.04
+
+    steps:
+    - name: Install packages
+      run: |
+        echo "Installing build dependencies..."
+        apt update
+        apt upgrade -y
+        apt install -y git build-essential cmake ninja-build libglfw3-dev libgl1-mesa-dev libxinerama-dev libxcursor-dev libxi-dev python3-dev
+
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Build
+      run: |
+        mkdir build
+        cd build
+        cmake ..
+        make -j$(nproc)
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-cpu-ubuntu-2204
+        path: build/install
