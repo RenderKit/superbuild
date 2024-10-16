@@ -1,4 +1,4 @@
-## Copyright 2021 Intel Corporation
+## Copyright 2021-2024 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
 set(ISPC_VERSION 1.23.0 CACHE STRING "")
@@ -15,22 +15,8 @@ endif()
 
 set(ISPC_URL "https://github.com/ispc/ispc/releases/download/v${ISPC_VERSION}/ispc-v${ISPC_VERSION}-${ISPC_SUFFIX}" CACHE STRING "")
 
-if(WIN32)
-  set(_ISPC_SRC_LIB_NAME lib)
-  set(_ISPC_DST_LIB_NAME lib)
-elseif(APPLE)
-  set(_ISPC_SRC_LIB_NAME lib)
-  set(_ISPC_DST_LIB_NAME lib)
-else()
-  if(ISPC_VERSION MATCHES "dev")
-    set(_ISPC_SRC_LIB_NAME lib)
-    set(_ISPC_DST_LIB_NAME lib)
-  else()
-    set(_ISPC_SRC_LIB_NAME lib64)
-    set(_ISPC_DST_LIB_NAME lib64)
-  endif()
-  # set(FIND_LIBRARY_USE_LIB64_PATHS TRUE)
-endif()
+set(_ISPC_SRC_LIB_NAME lib)
+set(_ISPC_DST_LIB_NAME lib)
 
 ExternalProject_Add(ispc
   PREFIX ${SUBPROJECT_NAME}
