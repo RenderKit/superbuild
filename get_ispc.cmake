@@ -1,7 +1,7 @@
-## Copyright 2021-2024 Intel Corporation
+## Copyright 2021-2025 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(ISPC_VERSION 1.23.0 CACHE STRING "")
+set(ISPC_VERSION 1.25.3 CACHE STRING "")
 
 set(SUBPROJECT_NAME ispc-v${ISPC_VERSION})
 
