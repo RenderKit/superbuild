@@ -1,7 +1,7 @@
 ## Copyright 2021-2025 Intel Corporation
 ## SPDX-License-Identifier: Apache-2.0
 
-set(ISPC_VERSION 1.25.3 CACHE STRING "")
+set(ISPC_VERSION 1.29.1 CACHE STRING "")
 
 set(SUBPROJECT_NAME ispc-v${ISPC_VERSION})
 
@@ -10,7 +10,7 @@ if (APPLE)
 elseif(WIN32)
   set(ISPC_SUFFIX "windows.zip")
 else()
-  set(ISPC_SUFFIX "linux-oneapi.tar.gz")
+  set(ISPC_SUFFIX "linux.tar.gz")
 endif()
 
 set(ISPC_URL "https://github.com/ispc/ispc/releases/download/v${ISPC_VERSION}/ispc-v${ISPC_VERSION}-${ISPC_SUFFIX}" CACHE STRING "")
